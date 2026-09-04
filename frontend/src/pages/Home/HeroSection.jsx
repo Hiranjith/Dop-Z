@@ -3,15 +3,15 @@ import { Plus } from 'lucide-react';
 
 const HeroSection = () => {
   return (
-    <div className="relative rounded-2xl overflow-hidden mb-6 h-64 md:h-72 w-full bg-dark-card border border-white/5">
+    <div className="relative rounded-2xl overflow-hidden mb-6 h-64 md:h-72 lg:h-80 w-full bg-dark-card border border-white/5">
       {/* Background Images */}
       <div 
-        className="absolute inset-0 bg-cover bg-center md:hidden"
-        style={{ backgroundImage: `url('/Mobile banner.png')` }}
+        className="absolute inset-0 bg-cover md:hidden"
+        style={{ backgroundImage: `url('/Mobile banner.png')`, backgroundPosition: '50% 15%' }}
       />
       <div 
-        className="hidden md:block absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('/Laptop banner.png')` }}
+        className="hidden md:block absolute inset-0 bg-cover"
+        style={{ backgroundImage: `url('/Laptop banner.png')`, backgroundPosition: '50% 15%' }}
       />
       
       {/* Gradient Overlay for text readability */}

@@ -5,7 +5,7 @@ const Topbar = () => {
   return (
     <header className="md:hidden flex items-center justify-between p-4 bg-dark-bg">
       <h1 className="text-2xl font-bold italic text-white flex items-center">
-        <img src="/Logo.png" alt="Logo" className="w-8 h-8 mr-2 object-contain" />
+        <img src="/Logo.png" alt="Logo" className="w-10 h-10 mr-2 object-contain" />
         Dop <span className="text-primary ml-1 text-3xl leading-none">Z</span>
       </h1>
       <div className="flex items-center space-x-4">
