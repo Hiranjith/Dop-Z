@@ -15,6 +15,7 @@ const Sidebar = () => {
     <aside className="w-64 bg-dark-bg text-slate-300 h-screen fixed left-0 top-0 hidden md:flex flex-col border-r border-slate-800">
       <div className="p-6">
         <h1 className="text-2xl font-bold italic text-white flex items-center">
+          <img src="/Logo.png" alt="Logo" className="w-8 h-8 mr-2 object-contain" />
           Dop <span className="text-primary ml-1 text-3xl leading-none">Z</span>
         </h1>
       </div>
