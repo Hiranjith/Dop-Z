@@ -1,7 +1,10 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 
+import { useNavigate } from 'react-router-dom';
+
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative rounded-2xl overflow-hidden mb-6 h-64 md:h-72 lg:h-80 w-full bg-dark-card border border-white/5">
       {/* Background Images */}
@@ -27,7 +30,10 @@ const HeroSection = () => {
           Discipline today. A stronger you tomorrow.
         </p>
         
-        <button className="bg-primary hover:bg-primary-dark text-dark-bg font-bold py-3 px-6 rounded-lg flex items-center justify-center transition-colors w-full md:w-max">
+        <button 
+          onClick={() => navigate('/workout')}
+          className="bg-primary hover:bg-primary-dark text-dark-bg font-bold py-3 px-6 rounded-lg flex items-center justify-center transition-colors w-full md:w-max"
+        >
           <Plus className="w-5 h-5 mr-2" />
           Start Workout
         </button>
