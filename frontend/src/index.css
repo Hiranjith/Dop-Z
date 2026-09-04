@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8DC63F;
+  --color-primary-dark: #7ab32b;
+  --color-dark-bg: #09090b;
+  --color-dark-card: #18181b;
+  --color-light-bg: #f8fafc;
+  --color-light-card: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-light-bg text-slate-800 dark:bg-dark-bg dark:text-slate-200 antialiased font-sans transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
+  }
+}
