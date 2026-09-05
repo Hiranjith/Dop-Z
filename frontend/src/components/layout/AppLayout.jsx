@@ -10,7 +10,7 @@ const AppLayout = () => {
     <div className="flex h-screen bg-dark-bg text-slate-200 overflow-hidden font-sans">
       <Sidebar />
       
-      <main className="flex-1 md:ml-64 flex flex-col h-full overflow-y-auto">
+      <main className="flex-1 md:ml-64 flex flex-col h-full overflow-y-auto hide-scrollbar">
         <Topbar />
         
         {/* Desktop top right icons */}

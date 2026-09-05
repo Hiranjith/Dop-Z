@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ChevronLeft, Plus, X, ArrowRight, User } from 'lucide-react';
+import { Search, ChevronLeft, ChevronDown, Plus, X, ArrowRight, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { exercisesData, exerciseCategories } from '../../data/exercises';
 
@@ -69,8 +69,8 @@ const StartWorkout = () => {
           </div>
         </div>
 
-        {/* Categories */}
-        <div className="flex overflow-x-auto pb-2 mb-4 hide-scrollbar space-x-2">
+        {/* Categories - Mobile */}
+        <div className="md:hidden flex overflow-x-auto pb-2 mb-4 hide-scrollbar space-x-2">
           {exerciseCategories.map(cat => (
             <button
               key={cat}
@@ -86,8 +86,24 @@ const StartWorkout = () => {
           ))}
         </div>
 
+        {/* Categories - Desktop Dropdown */}
+        <div className="hidden md:block mb-6 relative w-48">
+          <select 
+            value={selectedCategory} 
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="w-full bg-slate-800/50 border border-slate-700 text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer transition-colors"
+          >
+            {exerciseCategories.map(cat => (
+              <option key={cat} value={cat} className="bg-dark-card text-white py-1">
+                {cat}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none" />
+        </div>
+
         {/* Exercises List */}
-        <div className="flex-1 overflow-y-auto pr-2 pb-20 md:pb-0">
+        <div className="flex-1 overflow-y-auto hide-scrollbar pr-2 pb-20 md:pb-0">
           <h2 className="text-lg font-semibold text-white mb-4 hidden md:block">Exercises</h2>
           <div className="space-y-2">
             {filteredExercises.map(exercise => {
@@ -147,7 +163,7 @@ const StartWorkout = () => {
           )}
         </div>
 
-        <div className="flex-1 overflow-y-auto space-y-3 mb-6">
+        <div className="flex-1 overflow-y-auto hide-scrollbar space-y-3 mb-6">
           {selectedExercises.length === 0 ? (
             <div className="text-center text-slate-500 text-sm mt-10">
               No exercises selected yet. <br /> Tap the + icon to add them.
@@ -177,6 +193,7 @@ const StartWorkout = () => {
 
         <button 
           disabled={selectedExercises.length === 0}
+          onClick={() => navigate('/workout/active', { state: { selectedExercises } })}
           className={`w-full py-3 rounded-lg flex items-center justify-center font-bold text-lg transition-colors ${
             selectedExercises.length > 0 
               ? 'bg-primary text-dark-bg hover:bg-primary-dark' 
@@ -214,7 +231,7 @@ const StartWorkout = () => {
             </button>
           </div>
           
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div className="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-3">
              {selectedExercises.map(exercise => (
               <div key={exercise.id} className="flex items-center justify-between p-3 rounded-xl border border-slate-800 bg-dark-card">
                 <div className="flex items-center">
@@ -238,6 +255,7 @@ const StartWorkout = () => {
 
           <div className="p-4 border-t border-slate-800 pb-[80px]">
             <button 
+              onClick={() => navigate('/workout/active', { state: { selectedExercises } })}
               className="w-full py-3 rounded-xl bg-primary text-dark-bg flex items-center justify-center font-bold text-lg"
             >
               Start Workout ({selectedExercises.length}) 

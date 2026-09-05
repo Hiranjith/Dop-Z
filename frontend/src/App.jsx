@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import Home from './pages/Home/Home';
 import StartWorkout from './pages/Workout/StartWorkout';
+import ActiveWorkout from './pages/Workout/ActiveWorkout';
 import './App.css';
 
 // Placeholder components for other routes
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="workout" element={<StartWorkout />} />
+          <Route path="workout/active" element={<ActiveWorkout />} />
           <Route path="exercises" element={<Placeholder title="Exercises" />} />
           <Route path="history" element={<Placeholder title="History" />} />
           <Route path="progress" element={<Placeholder title="Progress" />} />
