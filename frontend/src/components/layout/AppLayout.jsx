@@ -1,16 +1,32 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useRef, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import BottomNav from './BottomNav';
 import Topbar from './Topbar';
 import { Bell } from 'lucide-react';
 
 const AppLayout = () => {
+  const location = useLocation();
+  const mainRef = useRef(null);
+  
+  // Scroll to top on route change
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+    }
+  }, [location.pathname]);
+
+  // Routes where the bottom navigation and its padding should be hidden on mobile
+  const hideBottomNav = 
+    location.pathname === '/workout/active' || 
+    location.pathname === '/workout/summary' || 
+    location.pathname.startsWith('/workout/exercise/');
+
   return (
     <div className="flex h-screen bg-dark-bg text-slate-200 overflow-hidden font-sans">
       <Sidebar />
       
-      <main className="flex-1 md:ml-64 flex flex-col h-full overflow-y-auto hide-scrollbar">
+      <main ref={mainRef} className="flex-1 md:ml-64 flex flex-col h-full overflow-y-auto hide-scrollbar">
         <Topbar />
         
         {/* Desktop top right icons */}
@@ -24,12 +40,12 @@ const AppLayout = () => {
           </div>
         </div>
 
-        <div className="flex-1 p-4 md:p-8 pb-24 md:pb-8">
+        <div className={`flex-1 p-4 md:p-8 ${hideBottomNav ? 'pb-4' : 'pb-24'} md:pb-8`}>
           <Outlet />
         </div>
       </main>
       
-      <BottomNav />
+      {!hideBottomNav && <BottomNav />}
     </div>
   );
 };

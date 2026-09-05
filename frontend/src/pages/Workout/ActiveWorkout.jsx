@@ -19,6 +19,7 @@ const ActiveWorkout = () => {
   const [activeExerciseIndex, setActiveExerciseIndex] = useState(0);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [isQueueExpanded, setIsQueueExpanded] = useState(true);
+  const [showFinishConfirm, setShowFinishConfirm] = useState(false);
   
   const [workoutData, setWorkoutData] = useState(() => {
     const initialData = {};
@@ -200,9 +201,18 @@ const ActiveWorkout = () => {
   };
 
   const finishWorkout = () => {
-    if (window.confirm("Are you sure you want to finish this workout?")) {
-      navigate('/');
-    }
+    setShowFinishConfirm(true);
+  };
+
+  const confirmFinish = () => {
+    setShowFinishConfirm(false);
+    navigate('/workout/summary', {
+      state: {
+        elapsedSeconds,
+        workoutData,
+        selectedExercises
+      }
+    });
   };
 
   const completedCount = selectedExercises.filter(ex => workoutData[ex.id]?.status === 'completed').length;
@@ -265,7 +275,7 @@ const ActiveWorkout = () => {
       <div className="flex flex-col md:flex-row flex-1 overflow-hidden relative">
         
         {/* Left Column: Active Exercise Input (Scrollable) */}
-        <div className="flex-1 overflow-y-auto hide-scrollbar p-4 md:p-8 pb-40 md:pb-8">
+        <div className="flex-1 overflow-y-auto hide-scrollbar p-4 md:p-8 pb-4 md:pb-8">
           
           {/* Active Exercise Header */}
           <div className="flex items-center justify-between mb-6 md:mb-8 bg-dark-bg md:bg-transparent -mx-4 md:mx-0 px-4 md:px-0 pt-2 md:pt-0">
@@ -475,7 +485,7 @@ const ActiveWorkout = () => {
           </div>
           
           {/* Extra spacer at the bottom for mobile so the sticky button doesn't cover content */}
-          <div className="h-32 w-full md:hidden flex-shrink-0"></div>
+          <div className="h-24 w-full md:hidden flex-shrink-0"></div>
         </div>
 
         {/* Right Column: Queue and Stats (Desktop Only) */}
@@ -573,7 +583,7 @@ const ActiveWorkout = () => {
         </div>
 
         {/* Mobile Sticky Save & Next */}
-        <div className="md:hidden fixed bottom-[72px] left-0 right-0 border-t border-slate-800 bg-dark-bg p-3 z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-dark-bg px-3 py-2 z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
            <div className="flex items-center justify-between space-x-2">
               <button 
                 onClick={handlePreviousExercise}
@@ -609,6 +619,30 @@ const ActiveWorkout = () => {
         </div>
 
       </div>
+
+      {/* Finish Confirmation Modal */}
+      {showFinishConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-dark-bg border border-slate-700 rounded-2xl w-full max-w-sm p-6 shadow-2xl">
+            <h3 className="text-xl font-bold text-white mb-2">Finish Workout?</h3>
+            <p className="text-slate-400 text-sm mb-6">Are you sure you're ready to finish? You can't undo this action.</p>
+            <div className="flex space-x-3">
+              <button 
+                onClick={() => setShowFinishConfirm(false)}
+                className="flex-1 py-3 bg-slate-800 text-white rounded-xl font-semibold hover:bg-slate-700 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={confirmFinish}
+                className="flex-1 py-3 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 shadow-[0_0_15px_rgba(239,68,68,0.3)] transition-colors"
+              >
+                Finish
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

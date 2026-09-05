@@ -27,4 +27,51 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  
+  .animate-confetti {
+    animation: confetti-fall cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  .animate-check-pop {
+    animation: check-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  
+  .animate-circle-pulse {
+    animation: circle-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1) rotate(45deg);
+  }
+  100% {
+    transform: translateY(80px) scale(0.5) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes check-pop {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes circle-pulse {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(141,198,63,0.3);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(141,198,63,0.6);
+  }
 }
