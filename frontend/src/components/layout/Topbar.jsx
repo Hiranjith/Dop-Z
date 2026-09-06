@@ -1,7 +1,10 @@
 import React from 'react';
 import { Bell } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Topbar = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="md:hidden flex items-center justify-between p-4 bg-dark-bg">
       <h1 className="text-2xl font-bold italic text-white flex items-center">
@@ -13,7 +16,10 @@ const Topbar = () => {
           <Bell className="w-6 h-6" />
           <span className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
         </button>
-        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-dark-bg font-bold cursor-pointer">
+        <div 
+          onClick={() => navigate('/profile')}
+          className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-dark-bg font-bold cursor-pointer"
+        >
           H
         </div>
       </div>

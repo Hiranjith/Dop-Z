@@ -9,6 +9,8 @@ const WorkoutSummary = () => {
   // Get data from location state or use defaults for preview
   const state = location.state || {};
   const {
+    fromHistory,
+    fromProgress,
     elapsedSeconds = 3120, // 52 mins
     selectedExercises = [
       { id: '1', name: 'Seated Cable Row', category: 'Back' },
@@ -70,7 +72,7 @@ const WorkoutSummary = () => {
       {/* Top Navigation Bar - Shared */}
       <div className="flex items-center justify-between p-4 md:px-8 border-b border-slate-800 bg-dark-bg sticky top-0 z-20">
         <div className="flex items-center">
-          <button onClick={() => navigate('/')} className="mr-3 md:mr-4 p-1 md:p-2.5 -ml-1 md:ml-0 text-slate-300 hover:text-white md:bg-slate-800/50 md:border md:border-slate-700 rounded-xl transition-colors">
+          <button onClick={() => fromHistory ? navigate('/history') : fromProgress ? navigate('/progress') : navigate('/')} className="mr-3 md:mr-4 p-1 md:p-2.5 -ml-1 md:ml-0 text-slate-300 hover:text-white md:bg-slate-800/50 md:border md:border-slate-700 rounded-xl transition-colors">
             <ChevronLeft className="w-7 h-7 md:w-5 md:h-5" strokeWidth={2} />
           </button>
           <div className="flex flex-col justify-center">

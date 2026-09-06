@@ -6,6 +6,12 @@ import StartWorkout from './pages/Workout/StartWorkout';
 import ActiveWorkout from './pages/Workout/ActiveWorkout';
 import WorkoutSummary from './pages/Workout/WorkoutSummary';
 import ExerciseDetails from './pages/Workout/ExerciseDetails';
+import Exercises from './pages/Exercises/Exercises';
+import ExerciseGuidePage from './pages/Exercises/ExerciseGuidePage';
+import History from './pages/History/History';
+import Progress from './pages/Progress/Progress';
+import ExerciseProgress from './pages/Progress/ExerciseProgress';
+import Profile from './pages/Profile/Profile';
 import './App.css';
 
 // Placeholder components for other routes
@@ -25,10 +31,12 @@ function App() {
           <Route path="workout/active" element={<ActiveWorkout />} />
           <Route path="workout/summary" element={<WorkoutSummary />} />
           <Route path="workout/exercise/:id" element={<ExerciseDetails />} />
-          <Route path="exercises" element={<Placeholder title="Exercises" />} />
-          <Route path="history" element={<Placeholder title="History" />} />
-          <Route path="progress" element={<Placeholder title="Progress" />} />
-          <Route path="profile" element={<Placeholder title="Profile" />} />
+          <Route path="exercises" element={<Exercises />} />
+          <Route path="exercises/:id" element={<ExerciseGuidePage />} />
+          <Route path="history" element={<History />} />
+          <Route path="progress" element={<Progress />} />
+          <Route path="progress/exercise/:id" element={<ExerciseProgress />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </Router>
