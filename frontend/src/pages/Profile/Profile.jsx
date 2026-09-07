@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Settings, User, Ruler, LogOut, ChevronRight, Edit3 } from 'lucide-react';
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col md:-mx-8 md:-my-8 text-slate-200 bg-dark-bg animate-fade-in relative">
       
@@ -97,7 +100,10 @@ const Profile = () => {
 
           {/* Log Out Button */}
           <div className="pt-2 md:pt-4">
-            <button className="w-full flex items-center justify-center space-x-3 p-4 border border-red-500/30 rounded-2xl text-red-500 hover:bg-red-500/10 transition-colors shadow-sm font-medium">
+            <button 
+              onClick={() => navigate('/welcome')}
+              className="w-full flex items-center justify-center space-x-3 p-4 border border-red-500/30 rounded-2xl text-red-500 hover:bg-red-500/10 transition-colors shadow-sm font-medium"
+            >
               <LogOut className="w-5 h-5" />
               <span>Log Out</span>
             </button>

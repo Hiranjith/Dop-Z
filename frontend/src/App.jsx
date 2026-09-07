@@ -12,6 +12,16 @@ import History from './pages/History/History';
 import Progress from './pages/Progress/Progress';
 import ExerciseProgress from './pages/Progress/ExerciseProgress';
 import Profile from './pages/Profile/Profile';
+
+// Auth Pages
+import AuthLayout from './pages/Auth/AuthLayout';
+import Welcome from './pages/Auth/Welcome';
+import AuthOptions from './pages/Auth/AuthOptions';
+import EmailLogin from './pages/Auth/EmailLogin';
+import OTPVerification from './pages/Auth/OTPVerification';
+import ProfileSetup from './pages/Auth/ProfileSetup';
+import Success from './pages/Auth/Success';
+
 import './App.css';
 
 // Placeholder components for other routes
@@ -25,6 +35,21 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Auth Routes */}
+        <Route path="/welcome" element={<AuthLayout showBackButton={false} />}>
+          <Route index element={<Welcome />} />
+        </Route>
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="options" element={<AuthOptions />} />
+          <Route path="login" element={<EmailLogin />} />
+          <Route path="verify" element={<OTPVerification />} />
+          <Route path="profile" element={<ProfileSetup />} />
+        </Route>
+        <Route path="/auth/success" element={<AuthLayout showBackButton={false} />}>
+          <Route index element={<Success />} />
+        </Route>
+
+        {/* Main App Routes */}
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="workout" element={<StartWorkout />} />
